@@ -13,6 +13,7 @@ const client = new Client({
   ],
 });
 
+// initialise timings - minutes * seconds
 const focusTime = 25 * 60;
 const shortBreak = 5 * 60; 
 const longBreak = 15 * 60; 
@@ -23,7 +24,6 @@ client.once('ready', () => {
 });
 
 // building the ui for messages
-  // listen for message 'hi pomo' in any channel
   // if 'hi pomo' - build the welcome message and button options 
   // show the welcome message and button options in channel
 
@@ -67,4 +67,40 @@ client.once('ready', () => {
   // countdown for 15 min focus
 
 
+
+// This code runs when the event is triggered
+client.on("messageCreate", (message) => {
+
+  // listen for message 'hi pomo'
+  const userMessage = message.content.toLocaleLowerCase() 
+  if(userMessage === 'hi pomo'){
+
+    // build the welcome message embed component
+    const welcomeMessage = new EmbedBuilder()
+      .setColor('#cc95ab')
+      .setTitle('Hi School of Coder 🤓')
+      .setDescription('Choose your focus session below:')
+
+    // build the button options components for focus sessions with short or long break 
+    const buttonOptions = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId('focus_short')
+        .setLabel(`Short Break (${shortBreak / 60} mins)`)
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId('focus_long')
+        .setLabel(`Long Break (${longBreak / 60} mins)`)
+        .setStyle(ButtonStyle.Primary)
+    );
+
+    // send the components in chat to show to user
+      message.channel.send({
+      embeds: [welcomeMessage],
+      components: [buttonOptions],
+    });
+  }
+});
+  
+
+// bot token to link to discord account
 client.login(process.env.BOT_TOKEN);
