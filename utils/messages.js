@@ -10,7 +10,7 @@ export const createWelcomeMessage = () => {
   return {
     // Embed with title and description
     embed: new EmbedBuilder()
-      .setColor("#a37185")
+      .setColor("#76a0c4")
       .setTitle("Hi School of Coder 👋")
       .setDescription("Choose your focus session below:"),
     // Two buttons for different session types
