@@ -36,7 +36,7 @@ export const formatTimerMessage = (type, timeRemaining) => {
 
   // Create embed for timer display
   const timerEmbed = new EmbedBuilder()
-    .setColor("#76a0c4")
+    .setColor("#86bf7a")
     .setTitle("Focus Session In Progress")
     .setDescription(
       `Time left: ${minutes.toString()}:${seconds.toString().padStart(2, "0")}`
