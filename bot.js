@@ -6,6 +6,7 @@ import {
   createWelcomeMessage,
   formatTimerMessage,
   createCancelButton,
+  createCancelledMessage
 } from "./utils/messages.js";
 import {
   connectToVoice,
@@ -26,6 +27,7 @@ let currentVoiceConnection;
 // Verify sound file exists before starting
 if (!fs.existsSync(SOUND_CONFIG.CHIME_PATH)) {
   console.error("Error: Sound file not found at", SOUND_CONFIG.CHIME_PATH);
+  currentVoiceConnection.destroy();
   process.exit(1);
 }
 
@@ -69,13 +71,10 @@ client.on("interactionCreate", async (interaction) => {
     if (currentSessionInterval) clearInterval(currentSessionInterval);
     await muteMembersInChannel(voiceChannel, false);
 
-    const cancelEmbed = new EmbedBuilder()
-      .setColor("#ff6b6b")
-      .setTitle("Session Cancelled")
-      .setDescription("Focus session has been cancelled.");
+    const sessionCancelledMessage = createCancelledMessage()
 
     await interaction.editReply({
-      embeds: [cancelEmbed],
+      embeds: [sessionCancelledMessage],
       components: [],
     });
 
@@ -167,6 +166,7 @@ client.on("interactionCreate", async (interaction) => {
           breakDuration,
           timerMessage
         );
+
         return;
       }
 
@@ -190,23 +190,31 @@ client.on("interactionCreate", async (interaction) => {
       // When break timer ends
       if (remainingTime <= 0) {
         clearInterval(currentSessionInterval);
+        // Play the chime
+        playChime(currentVoiceConnection);
 
-        // Show break completion message
-        const breakCompletionEmbed = new EmbedBuilder()
-          .setColor("#43b581")
-          .setTitle("Break Complete! ⏰")
-          .setDescription("Ready for another session?")
-          .addFields({
-            name: "Start New Session",
-            value: 'Type "hi pomo" to begin',
+        // Wait for a short duration to ensure the chime plays
+        setTimeout(async () => {
+          if (currentVoiceConnection) currentVoiceConnection.destroy();
+        
+          // Show break completion message
+          const breakCompletionEmbed = new EmbedBuilder()
+            .setColor("#43b581")
+            .setTitle("Break Complete! ⏰")
+            .setDescription("Ready for another session?")
+            .addFields({
+              name: "Start New Session",
+              value: 'Type "hi pomo" to begin',
+            });
+        
+          await timerMessage.edit({
+            embeds: [breakCompletionEmbed],
+            components: [],
           });
-
-        await timerMessage.edit({
-          embeds: [breakCompletionEmbed],
-          components: [],
-        });
+        }, TIMER_SETTINGS.UPDATE_INTERVAL);
+        
         return;
-      }
+      };
 
       // Update break timer display
       timerMessage.edit({

@@ -3,8 +3,8 @@ import path from "path";
 
 // Timer durations and update frequency in milliseconds
 export const TIMER_SETTINGS = {
-  FOCUS: 25 * 60 * 1000, // 25 minutes focus session
-  SHORT_BREAK: 5 * 60 * 1000, // 5 minutes break
+  FOCUS: 0.5 * 60 * 1000, // 25 minutes focus session
+  SHORT_BREAK: 0.5 * 60 * 1000, // 5 minutes break
   LONG_BREAK: 15 * 60 * 1000, // 15 minutes break
   UPDATE_INTERVAL: 5000, // Update timer display every 5 seconds to avoid rate limits
 };

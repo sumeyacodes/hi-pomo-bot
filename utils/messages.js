@@ -35,9 +35,13 @@ export const formatTimerMessage = (type, timeRemaining) => {
   const seconds = totalSeconds % 60;
 
   // Create embed for timer display
+  const sessionTitle =
+  type === "Focus" ? "Focus Session In Progress" : `${type} In Progress`;
+
+  // Create embed for timer display
   const timerEmbed = new EmbedBuilder()
     .setColor("#86bf7a")
-    .setTitle("Focus Session In Progress")
+    .setTitle(sessionTitle)
     .setDescription(
       `Time left: ${minutes.toString()}:${seconds.toString().padStart(2, "0")}`
     )
@@ -60,3 +64,13 @@ export const createCancelButton = () => {
       .setStyle(ButtonStyle.Danger)
   );
 };
+
+export const createCancelledMessage = () => {
+      const cancelMessageEmbed = new EmbedBuilder()
+      .setColor("#ff6b6b")
+      .setTitle("Session Cancelled")
+      .setDescription("Focus session has been cancelled.");
+      return {
+        embeds: [cancelMessageEmbed],
+      };
+}

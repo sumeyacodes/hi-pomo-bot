@@ -11,6 +11,8 @@ export const connectToVoice = (voiceChannel) => {
     channelId: voiceChannel.id,
     guildId: voiceChannel.guild.id,
     adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    selfDeaf: true,
+    selfMute: false,
   });
 };
 
