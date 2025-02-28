@@ -2,14 +2,13 @@
 
 A Discord bot designed to manage group study sessions using the Pomodoro Technique on the School of Code Server.
 
+<img width="427" alt="image" src="https://github.com/user-attachments/assets/7091d805-04b6-49f3-ba62-cc5991b2957c" />
+
 ## Features
 - Starts a Pomodoro session (default: 25 minutes) with automatic muting.
 - Sends reminders to take a short break (default: 5 minutes).
 - Sends reminders to take a long break (default: 15 minutes).
 - Mutes everyone in a voice channel during focus sessions.
-
-
-<img width="427" alt="image" src="https://github.com/user-attachments/assets/7091d805-04b6-49f3-ba62-cc5991b2957c" />
 
 
 
