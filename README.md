@@ -10,6 +10,8 @@ A few of us wanted to benefit from community learning through study or body doub
 
 The HiPomo bot helped to simplifiy and automate this process by providing an inbuilt timer on the server for everyone to use. When activated, it starts with a 25-minute focus session that automatically mutes all voice channel members, followed by either a long or short break (depending on selection).
 
+-------------
+
 ### Features
 - Starts a Pomodoro session (default: 25 minutes) with automatic muting.
 - Sends reminders to take a short break (default: 5 minutes).
