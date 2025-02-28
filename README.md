@@ -1,31 +1,18 @@
-# HiPomo Discord bot - PLAN 
+# HiPomo
 
-## OUR IDEAS
-- booking body double sessions
-- pomodoro timer with short and long breaks (5 or 15 mins)
-- mutes members in channel when in focus mode
+A Discord bot designed to manage group study sessions using the Pomodoro Technique on the School of Code Server.
 
-### USER FLOW - MVP 1
+## The problem this project solves
 
-1. user calls bot by writing message 'hi pomo'
-2. bot appears with welcome message
-    - presents 2 options: 
-        - short break: 25min focus, 5min break
-        - long break: 25min focus, 15 min break
-3. user selects either short or long break options
-    - bot applies selection to specific channel user is in (for all members in channel)
-4. timer for focus session starts
-    - bot joins channel user is in
-    - bot mutes everyone in channel
-    - count down message appears
-    - cancel session button appears
-5. when focus timer finishes
-    - timer bell sound plays 
-    - bot unmutes everyone in channel
-    - count down message changes to 'focus session finished'
-    - break timer starts count down
-6. if focus session is cancelled (user presses cancel button)
-    - focus timer stops 
-    - timer countdown message changes to 'focus session cancelled'
-7. after break timer ends
-    - message appears "thanks for using hipomo, call hi pomo to start again"
+I created HiPomo to help streamline study group sessions for my cohort on our Discord server.
+
+A few of us wanted to benefit from community learning through study or body doubling sessions. Initially, we manually set Pomodoro timers and shared screens, which was too inefficient.
+
+The HiPomo bot helped to simplifiy and automate this process by providing an inbuilt timer on the server for everyone to use. When activated, it starts with a 25-minute focus session that automatically mutes all voice channel members, followed by either a long or short break (depending on selection).
+
+## Features
+- Starts a Pomodoro session (default: 25 minutes) with automatic muting.
+- Sends reminders to take a short break (default: 5 minutes).
+- Sends reminders to take a long break (default: 15 minutes).
+- Mutes everyone in a voice channel during focus sessions.
+- Plays a sound session ends.
